@@ -1,6 +1,7 @@
 from sympy import false, true
 from priorityQueue import PriorityQueue, Node
 from copy import deepcopy
+from time import time
 import sys
 
 def lokasi(matriks, x) :
@@ -71,7 +72,14 @@ def printSolution(node):
     listNode.append(node)
     for i in range (len(listNode)-1, -1, -1):
         printNode(listNode[i])
-    sys.exit()
+    done = true
+
+def readFile(fileName):
+    dir = ".\\test\\"
+    dir += fileName
+    file = open(dir, "r")
+    matriks = [[int(num) for num in line.split(' ')] for line in file]
+    return matriks
 
 def nextNode(node):
     global id
@@ -123,12 +131,21 @@ def nextNode(node):
 
 pq = PriorityQueue()
 id = 1
-initial_matrix = [[1,2,3,4],[5,6,16,8],[9,10,7,11],[13,14,15,12]]
-root = Node(None, id, initial_matrix, 0, [1,2], 0)
+done = false
+fileName = input("Masukkan nama file : ")
+
+start_time = time()
+initial_matrix = readFile(fileName)
+for i in range (4) :
+    for j in range (4) :
+        if(initial_matrix[i][j] == 16) :
+            initial_block_pos = [i, j]
+            break
+root = Node(None, id, initial_matrix, 0, initial_block_pos, 0)
 cost(root)
 pq.push(root)
 if(totalKurang(root) % 2 == 0):
-    while(not pq.empty()):
+    while(not pq.empty() and not done):
         node = pq.pop()
         if isSolution(node):
             print("Solusi ditemukan")
@@ -136,5 +153,8 @@ if(totalKurang(root) % 2 == 0):
         nextNode(node)
 else :
     print("Tidak ada solusi yang mungkin")
+
+end_time = time()
+print("Waktu Eksekusi : " + str(end_time - start_time)+ " detik")
 
 
