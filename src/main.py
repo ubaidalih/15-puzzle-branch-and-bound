@@ -41,20 +41,36 @@ def isSolution(node):
     return solution
 
 def printNode(node):
-    print("ID: " + str(node.id))
-    print("Cost: " + str(node.cost))
-    print("Level: " + str(node.level))
+    print("Urutan Pencarian : " + str(node.id))
+    print("Cost : " + str(node.cost))
+    print("Level : " + str(node.level))
+    for i in range (21) :
+        print("-", end="")
+    print("")
     for i in range (4) :
         for j in range (4) :
-            print(node.matrix[i][j], end = " ")
-        print("\n")
-    print("\n")
+            print("|", end="")
+            if(node.matrix[i][j] >= 10):
+                if node.matrix[i][j] == 16 :
+                    print("  -", end=" ")  
+                else :
+                    print(" " + str(node.matrix[i][j]), end=" ")
+            else :
+                print("  " + str(node.matrix[i][j]), end=" ")        
+        print("|", end="\n")
+        for i in range (21) :
+            print("-", end="")
+        print("")
+    print("")
 
 def printSolution(node):
+    listNode = []
     while node.parent != None :
-        printNode(node)
+        listNode.append(node)
         node = node.parent
-    printNode(node)
+    listNode.append(node)
+    for i in range (len(listNode)-1, -1, -1):
+        printNode(listNode[i])
     sys.exit()
 
 def nextNode(node):
