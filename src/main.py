@@ -1,5 +1,5 @@
-import branchandbound as bnb
-from branchandbound import pq, done
+import branchAndBound as bnb
+from branchAndBound import pq, done
 from priorityQueue import Node
 from time import time
 
@@ -12,7 +12,7 @@ for i in range (4) :
         if(initial_matrix[i][j] == 16) :
             initial_block_pos = [i, j]
             break
-root = Node(None, id, initial_matrix, 0, initial_block_pos, 0)
+root = Node(None, 0 , initial_matrix, 0, initial_block_pos, 0)
 bnb.cost(root)
 pq.push(root)
 if(bnb.totalKurang(root) % 2 == 0):

@@ -44,7 +44,7 @@ def isSolution(node):
     return solution
 
 def printNode(node):
-    print("Urutan Pencarian : " + str(node.id))
+    print("Simpul ke-" + str(node.id))
     print("Cost : " + str(node.cost))
     print("Level : " + str(node.level))
     for i in range (21) :
