@@ -15,6 +15,7 @@ for i in range (4) :
 root = Node(None, 0 , initial_matrix, 0, initial_block_pos, 0)
 bnb.cost(root)
 pq.push(root)
+print("Fungsi Kurang : " + str(bnb.totalKurang(root)))
 if(bnb.totalKurang(root) % 2 == 0):
     while(not pq.empty() and not done):
         node = pq.pop()
